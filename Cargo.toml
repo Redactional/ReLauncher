@@ -23,7 +23,7 @@ before-packaging-command = "cargo build --release"
 
 [dependencies]
 anyhow = "1"
-dirs = "6"
+dirs = "7"
 eframe = "0.37"
 egui = "0.37"
 egui_material_icons = "0.9"
