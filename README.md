@@ -17,6 +17,7 @@
 </p>
 
 <p align="center">
+  <a href="https://redactional.github.io/ReLauncher/"><b>Website</b></a> ·
   <a href="#download">Download</a> ·
   <a href="#features">Features</a> ·
   <a href="docs/adding-programs.md">Add a program</a> ·
@@ -27,7 +28,7 @@
 
 ## Download
 
-Get the installer for your system from the [latest release](https://github.com/Redactional/ReLauncher/releases/latest):
+Get it from the **[website](https://redactional.github.io/ReLauncher/)**, which picks the right file for your system, or from the [latest release](https://github.com/Redactional/ReLauncher/releases/latest):
 
 | System | Download |
 |---|---|

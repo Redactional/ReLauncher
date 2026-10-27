@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ReLauncher: every Re program in one place</title>
+  <meta name="description" content="Download ReLauncher and the Re family of programs, including ReEtched. Free, open source, for Windows, macOS and Linux.">
+  <meta name="theme-color" content="#171717">
+  <meta property="og:title" content="ReLauncher">
+  <meta property="og:description" content="Install, update and launch every Re program. Free and open source.">
+  <meta property="og:image" content="icon.png">
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-row">
+      <a class="brand" href="#top">
+        <img src="favicon.png" alt="" width="28" height="28">
+        <span>ReLauncher</span>
+      </a>
+      <nav>
+        <a href="#programs">Programs</a>
+        <a href="https://github.com/Redactional/ReLauncher">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-row">
+        <div class="hero-text">
+          <p class="eyebrow">Free and open source</p>
+          <h1>Every Re program.<br>One launcher.</h1>
+          <p class="lead">ReLauncher installs, updates and launches the Re family of apps. It always fetches the latest official release, sets up what each program needs, and keeps everything current.</p>
+          <div class="cta" id="launcher-cta">
+            <a class="btn primary" id="launcher-download" href="https://github.com/Redactional/ReLauncher/releases/latest">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>
+              <span>Download ReLauncher</span>
+            </a>
+            <div class="cta-meta">
+              <span id="launcher-version">Latest release</span>
+              <span class="dot">·</span>
+              <a href="#all-platforms" id="launcher-other">Other platforms</a>
+            </div>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="glow"></div>
+          <img src="icon.png" alt="ReLauncher icon" width="300" height="300">
+        </div>
+      </div>
+    </section>
+
+    <section class="features wrap">
+      <div class="feature">
+        <h3>Always current</h3>
+        <p>Every download comes straight from the program's latest GitHub release. Updates are one click.</p>
+      </div>
+      <div class="feature">
+        <h3>Sets things up</h3>
+        <p>Required runtimes are installed with the program. Optional extras come with a link.</p>
+      </div>
+      <div class="feature">
+        <h3>Feels native</h3>
+        <p>Programs show up in Start, Spotlight or your app menu, installed wherever you choose.</p>
+      </div>
+      <div class="feature">
+        <h3>Clean removal</h3>
+        <p>Uninstalling removes only the program's own folder, never your work.</p>
+      </div>
+    </section>
+
+    <section id="programs" class="wrap">
+      <div class="section-head">
+        <h2>Programs</h2>
+        <p>Get them through ReLauncher, or download directly.</p>
+      </div>
+      <div class="grid" id="program-grid">
+        <div class="card skeleton"></div>
+      </div>
+    </section>
+
+    <section id="all-platforms" class="wrap">
+      <div class="section-head">
+        <h2>ReLauncher downloads</h2>
+        <p>Every platform from the latest release.</p>
+      </div>
+      <div class="card platforms" id="launcher-platforms">
+        <p class="muted">Loading…</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-row">
+      <span>ReLauncher and the Re programs are free and open source (MIT or Apache 2.0).</span>
+      <span>
+        <a href="https://github.com/Redactional/ReLauncher">ReLauncher on GitHub</a>
+        <span class="dot">·</span>
+        <a href="https://github.com/Redactional/ReLauncher/issues/new/choose">Report a problem</a>
+      </span>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -36,6 +36,7 @@ src/
   install.rs   install, update, uninstall, launch, system search entries, requirements
   settings.rs  install folder and install records
 programs.json  the published program list (see docs/adding-programs.md)
+site/          the website, published to GitHub Pages by .github/workflows/pages.yml
 ```
 
 ## Releases
@@ -52,7 +53,11 @@ Versions follow [semantic versioning](https://semver.org).
 
 A tag with a suffix (`v0.2.0-beta.1`) becomes a pre-release. The workflow refuses to run if the tag and `Cargo.toml` disagree. To rebuild an existing tag, run it from the Actions tab.
 
-Changes to `programs.json` need no release: they reach users as soon as they're on `main`.
+Changes to `programs.json` need no release: they reach ReLauncher users and the website as soon as they're on `main`.
+
+## Website
+
+The site in `site/` is plain HTML, CSS and JavaScript. It reads `programs.json` and each program's latest release from GitHub in the visitor's browser, so it never needs updating for a new version. To preview it, copy `site/`, `programs.json` and the icons into one folder the way the Website workflow does, and serve that folder (for example `python -m http.server`).
 
 ## License of contributions
 
