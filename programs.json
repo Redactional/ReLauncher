@@ -1,0 +1,49 @@
+{
+  "programs": [
+    {
+      "id": "reetched",
+      "name": "ReEtched",
+      "description": "Open-source 3D texture painter: paint PBR materials on your models, bake mesh maps, and bring over Substance Painter projects.",
+      "repo": "https://github.com/Redactional/ReEtched",
+      "icon": "https://raw.githubusercontent.com/Redactional/ReEtched/main/assets/icons/ReEtched_1024.png",
+      "launch": {
+        "windows": "reetched.exe",
+        "macos": "ReEtched.app",
+        "linux": "reetched"
+      },
+      "requirements": [
+        {
+          "name": "Microsoft Visual C++ Runtime",
+          "platforms": ["windows"],
+          "check": { "files": ["%SystemRoot%\\System32\\vcruntime140.dll"] },
+          "install": {
+            "run": "https://aka.ms/vs/17/release/vc_redist.x64.exe",
+            "args": ["/install", "/quiet", "/norestart"],
+            "elevated": true
+          }
+        },
+        {
+          "name": "Vulkan loader",
+          "platforms": ["linux"],
+          "check": {
+            "files": [
+              "/usr/lib/x86_64-linux-gnu/libvulkan.so.1",
+              "/usr/lib64/libvulkan.so.1",
+              "/usr/lib/libvulkan.so.1"
+            ]
+          },
+          "note": "Install your distribution's Vulkan loader package (libvulkan1 on Debian/Ubuntu, vulkan-icd-loader on Arch/Fedora)."
+        },
+        {
+          "name": "Python 3.8 or newer",
+          "optional": true,
+          "note": "Only needed for Python scripts and plugins.",
+          "check": {
+            "commands": [["py", "-3", "--version"], ["python3", "--version"], ["python", "--version"]]
+          },
+          "install": { "open": "https://www.python.org/downloads/" }
+        }
+      ]
+    }
+  ]
+}
