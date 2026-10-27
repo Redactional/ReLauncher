@@ -1,76 +1,77 @@
-# ReLauncher
+<p align="center">
+  <img src="assets/icons/ReLauncher_1024.png" alt="ReLauncher" width="150">
+</p>
 
-Installs, updates and launches the Re programs (such as [ReEtched](https://github.com/Redactional/ReEtched)) on Windows, macOS and Linux.
+<h1 align="center">ReLauncher</h1>
 
-- **One place for every Re program**: see what's installed, what's new, and launch it.
-- **Always current**: each program's latest version and release notes come straight from its GitHub releases.
-- **Installs where you want**: pick the install folder in Settings. The defaults need no administrator rights:
+<p align="center">
+  <b>One home for every Re program.</b><br>
+  Install, update and launch ReEtched and the rest of the Re family, all in one place.
+</p>
+
+<p align="center">
+  <a href="https://github.com/Redactional/ReLauncher/releases/latest"><img alt="Latest release" src="https://img.shields.io/github/v/release/Redactional/ReLauncher?label=release&color=4a90d9"></a>
+  <a href="https://github.com/Redactional/ReLauncher/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/Redactional/ReLauncher/actions/workflows/ci.yml/badge.svg"></a>
+  <img alt="Platforms" src="https://img.shields.io/badge/platforms-Windows%20%7C%20macOS%20%7C%20Linux-555">
+  <a href="#license"><img alt="License" src="https://img.shields.io/badge/license-MIT%20%2F%20Apache--2.0-555"></a>
+</p>
+
+<p align="center">
+  <a href="#download">Download</a> ·
+  <a href="#features">Features</a> ·
+  <a href="docs/adding-programs.md">Add a program</a> ·
+  <a href="https://github.com/Redactional/ReLauncher/issues/new/choose">Report a bug</a>
+</p>
+
+---
+
+## Download
+
+Get the installer for your system from the [latest release](https://github.com/Redactional/ReLauncher/releases/latest):
+
+| System | Download |
+|---|---|
+| Windows 10 / 11 (64-bit) | Installer (`.exe`) |
+| macOS (Apple Silicon) | Disk image (`.dmg`) |
+| Linux (x86-64) | `.deb` package or `.AppImage` |
+
+## Features
+
+- **Every Re program in one library.** See what's installed, what's new, and launch it with one click.
+- **Always up to date.** ReLauncher checks each program's latest release and tells you when an update is ready, along with the release notes. Updates replace the old version in one step.
+- **Install where you want.** Choose the install folder in Settings. The defaults need no administrator rights:
   - Windows: `%LOCALAPPDATA%\Programs\Re`
   - macOS: `~/Applications`
   - Linux: `~/.local/share/re-programs`
-- **Shows up in the system search**:
-  - Windows: a Start Menu shortcut.
-  - macOS: Spotlight and Launchpad pick up the `.app`.
-  - Linux: a `.desktop` entry with the program's icon.
-- **Sets up what programs need**: requirements like the Microsoft Visual C++ Runtime are checked and installed along with the program. Optional ones are listed with a link to get them.
-- **Clean updates and removal**: an update swaps in the new version in one step. Uninstall removes only folders ReLauncher created.
+- **Found by your system search.** Installed programs get a Start Menu entry on Windows and an application entry with their icon on Linux. On macOS, Spotlight and Launchpad find them.
+- **Sets up what programs need.** Required components, like the Microsoft Visual C++ Runtime, are checked and installed along with the program. Optional extras are listed with a link to get them.
+- **Clean removal.** Uninstalling deletes only the program's own folder, never your projects or anything ReLauncher didn't create.
+- **New programs appear automatically.** The program list is published from this repository, so new Re programs show up without a ReLauncher update.
 
-## Adding a program
+## Using ReLauncher
 
-The list of programs is [`programs.json`](programs.json) in this repository. ReLauncher downloads it at startup, so new programs appear without a ReLauncher update.
+1. Pick a program in the library.
+2. Click **Install**. Its requirements are set up first; Windows may ask for permission for some of them.
+3. Click **Launch**, or find the program in your system search.
 
-```json
-{
-  "programs": [
-    {
-      "id": "reetched",
-      "name": "ReEtched",
-      "description": "Open-source 3D texture painter.",
-      "repo": "https://github.com/Redactional/ReEtched",
-      "icon": "https://raw.githubusercontent.com/Redactional/ReEtched/main/assets/icons/ReEtched_1024.png",
-      "launch": { "windows": "reetched.exe", "macos": "ReEtched.app", "linux": "reetched" },
-      "requirements": [
-        {
-          "name": "Microsoft Visual C++ Runtime",
-          "platforms": ["windows"],
-          "check": { "files": ["%SystemRoot%\\System32\\vcruntime140.dll"] },
-          "install": { "run": "https://aka.ms/vs/17/release/vc_redist.x64.exe", "args": ["/install", "/quiet", "/norestart"], "elevated": true }
-        }
-      ]
-    }
-  ]
-}
-```
+When an update is out, the program shows **Update available**. Click **Update to …** to get it. The refresh button checks again at any time.
 
-| Field | Meaning |
-|---|---|
-| `id` | Stable key for install records and shortcuts. Don't change it once published. |
-| `repo` | The GitHub repository. Its latest published (non-draft, non-prerelease) release is the version ReLauncher installs. |
-| `icon` | Raw URL of a PNG icon. |
-| `launch` | What to run inside the unpacked program, per OS. |
-| `requirements` | Things the program needs on the system. `check` is met when any listed file exists (`%VAR%`, `$VAR` and `~` are expanded) or any listed command runs successfully. `install.run` downloads and runs an installer (`elevated` asks for administrator rights on Windows). `install.open` opens a page instead. `optional` requirements don't block installs. `platforms` limits a requirement to `windows`, `macos` or `linux`. |
+## Building from source
 
-### Release archives
-
-Each release needs one zip per platform whose name ends in `-<platform>.zip`:
-
-- `-windows-x64.zip`
-- `-macos-arm64.zip`
-- `-linux-x64.zip`
-
-For example, `ReEtched-0.2.0-windows-x64.zip`. The files can sit at the top of the zip or inside one folder. On macOS, the zip holds the `.app`.
-
-To try a changed `programs.json` before pushing it, set `RELAUNCHER_CATALOG` to the file's path (or another URL).
-
-## Building
+You need [Rust](https://rustup.rs) 1.96 or newer.
 
 ```bash
-cargo run
-cargo test
+cargo run --release
 ```
 
-Installers are built with [cargo-packager](https://github.com/crabnebula-dev/cargo-packager). Pushing a `v*` tag builds them on all three platforms and attaches them to a draft GitHub release.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for tests, the program list and how releases are made.
+
+## Contributing
+
+- **Found a bug or have an idea?** [Open an issue](https://github.com/Redactional/ReLauncher/issues/new/choose).
+- **Problem with a program itself** (not installing or launching it)? Report it in that program's repository, for example [ReEtched](https://github.com/Redactional/ReEtched/issues/new/choose).
+- **Maintain a Re program?** See [Adding a program](docs/adding-programs.md).
 
 ## License
 
-MIT or Apache-2.0, at your option.
+ReLauncher is dual-licensed under [MIT](LICENSE-MIT) or [Apache 2.0](LICENSE-APACHE), at your option.

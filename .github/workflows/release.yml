@@ -1,44 +1,89 @@
+# Builds ReLauncher for Windows, macOS and Linux and publishes a GitHub release.
+# Runs when a version tag (v1.2.3) is pushed, or by hand for an existing tag.
 name: Release
 
 on:
   push:
     tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to build and publish (for example v0.2.0)
+        required: true
 
 permissions:
   contents: write
 
 env:
   CARGO_TERM_COLOR: always
+  TAG: ${{ inputs.tag || github.ref_name }}
 
 jobs:
-  package:
-    name: ${{ matrix.os }}
+  build:
+    name: Build (${{ matrix.platform }})
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         include:
           - os: windows-latest
             formats: nsis
+            platform: windows-x64
           - os: macos-latest
-            formats: dmg
+            formats: app,dmg
+            platform: macos-arm64
           - os: ubuntu-latest
             formats: deb,appimage
+            platform: linux-x64
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ env.TAG }}
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
+
+      - name: Check the tag matches the version
+        shell: bash
+        run: |
+          version=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version')
+          if [ "${TAG#v}" != "$version" ]; then
+            echo "::error::Tag $TAG doesn't match the version in Cargo.toml ($version). Update it first."
+            exit 1
+          fi
+
       - name: Install cargo-packager
         run: cargo install cargo-packager --locked
+
       - name: Build
         run: cargo build --release
-      - name: Package
+
+      - name: Installers
         run: cargo packager --release --formats ${{ matrix.formats }} --binaries-dir target/release --out-dir dist
-      - uses: softprops/action-gh-release@v2
+
+      - uses: actions/upload-artifact@v4
         with:
-          draft: true
-          files: |
+          name: dist-${{ matrix.platform }}
+          if-no-files-found: error
+          path: |
             dist/*.exe
             dist/*.dmg
             dist/*.deb
             dist/*.AppImage
+
+  publish:
+    name: Publish the release
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: dist
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.TAG }}
+          name: ReLauncher ${{ env.TAG }}
+          generate_release_notes: true
+          prerelease: ${{ contains(env.TAG, '-') }}
+          fail_on_unmatched_files: true
+          files: dist/*

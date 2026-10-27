@@ -1,0 +1,19 @@
+name: Feature request
+description: Suggest a new feature or an improvement to ReLauncher.
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would you like to do?
+      description: The task that's hard or impossible today.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: How could ReLauncher help?
+  - type: textarea
+    id: extra
+    attributes:
+      label: Anything else?

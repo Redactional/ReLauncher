@@ -1,0 +1,8 @@
+* text=auto
+*.png binary
+*.exr binary
+*.hdr binary
+*.fbx binary
+*.glb binary
+*.ico binary
+*.icns binary
