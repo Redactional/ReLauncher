@@ -136,7 +136,14 @@ function programCard(p) {
     el("div", { class: "program-head" }, el("img", { src: p.icon || "icon.png", alt: "", loading: "lazy" }), el("div", {}, el("h3", {}, p.name), version)),
     el("p", { class: "desc" }, p.description || ""),
     actions,
-    el("div", { class: "links" }, releaseLink, el("a", { href: p.repo }, "Source code"), el("a", { href: `${p.repo}/issues/new/choose` }, "Report a bug")),
+    el(
+      "div",
+      { class: "links" },
+      p.docs ? el("a", { href: `docs.html?p=${encodeURIComponent(p.id)}` }, "Documentation") : null,
+      releaseLink,
+      el("a", { href: p.repo }, "Source code"),
+      el("a", { href: `${p.repo}/issues/new/choose` }, "Report a bug"),
+    ),
   );
   latest(p.repo)
     .then((r) => {

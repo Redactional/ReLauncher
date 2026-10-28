@@ -25,6 +25,10 @@ pub struct Program {
     /// Raw URL of the app icon (PNG).
     #[serde(default)]
     pub icon: Option<String>,
+    /// Folder of the program's manual inside its repository (index.json and
+    /// one Markdown file per page), shown on the website's docs page.
+    #[serde(default)]
+    pub docs: Option<String>,
     /// What to run, relative to the install folder, per OS.
     #[serde(default)]
     pub launch: Launch,
@@ -160,5 +164,6 @@ mod tests {
         assert!(p.repo.starts_with("https://github.com/"));
         assert!(p.launch.current().is_some());
         assert!(p.requirements.iter().any(|r| r.optional));
+        assert!(p.docs.is_some());
     }
 }

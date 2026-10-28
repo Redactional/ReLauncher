@@ -6,6 +6,7 @@
       "description": "Open-source 3D texture painter: paint PBR materials on your models, bake mesh maps, and bring over Substance Painter projects.",
       "repo": "https://github.com/Redactional/ReEtched",
       "icon": "https://raw.githubusercontent.com/Redactional/ReEtched/main/assets/icons/ReEtched_1024.png",
+      "docs": "docs/manual",
       "launch": {
         "windows": "reetched.exe",
         "macos": "ReEtched.app",

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Documentation · ReLauncher</title>
+  <meta name="description" content="User manuals for the Re programs.">
+  <meta name="theme-color" content="#171717">
+  <link rel="icon" href="favicon.png">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="docs.css">
+</head>
+<body class="docs-page">
+  <header class="nav">
+    <div class="wrap nav-row wide">
+      <a class="brand" href="./">
+        <img src="favicon.png" alt="" width="28" height="28">
+        <span>ReLauncher</span>
+      </a>
+      <nav>
+        <a href="./#programs">Programs</a>
+        <a href="docs.html" aria-current="page">Docs</a>
+        <a href="https://github.com/Redactional/ReLauncher">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="docs-layout wrap wide">
+    <aside class="docs-side" id="docs-side">
+      <label class="docs-program">
+        <span class="sr-only">Program</span>
+        <select id="program-select"></select>
+      </label>
+      <input type="search" id="docs-search" placeholder="Search the manual" autocomplete="off">
+      <nav id="docs-nav" aria-label="Manual"></nav>
+    </aside>
+
+    <main class="docs-main">
+      <button class="docs-menu" id="docs-menu" type="button" aria-controls="docs-side">☰ Contents</button>
+      <article class="doc" id="doc">
+        <p class="muted">Loading…</p>
+      </article>
+      <nav class="doc-pager" id="doc-pager"></nav>
+    </main>
+
+    <aside class="docs-toc" id="docs-toc" aria-label="On this page"></aside>
+  </div>
+
+  <footer class="footer">
+    <div class="wrap wide footer-row">
+      <span>Free and open source (MIT or Apache 2.0).</span>
+      <span id="doc-edit"></span>
+    </div>
+  </footer>
+
+  <script src="vendor/marked.min.js"></script>
+  <script src="vendor/purify.min.js"></script>
+  <script src="docs.js"></script>
+</body>
+</html>

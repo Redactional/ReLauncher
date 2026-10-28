@@ -13,6 +13,7 @@ ReLauncher's library comes from [`programs.json`](../programs.json) in this repo
       "description": "Open-source 3D texture painter.",
       "repo": "https://github.com/Redactional/ReEtched",
       "icon": "https://raw.githubusercontent.com/Redactional/ReEtched/main/assets/icons/ReEtched_1024.png",
+      "docs": "docs/manual",
       "launch": { "windows": "reetched.exe", "macos": "ReEtched.app", "linux": "reetched" },
       "requirements": [
         {
@@ -44,6 +45,7 @@ ReLauncher's library comes from [`programs.json`](../programs.json) in this repo
 | `name`, `description` | Shown in the library. The first line of the description is also used for system search entries. |
 | `repo` | The program's GitHub repository. Its latest published release is what ReLauncher installs. Drafts and pre-releases are skipped. |
 | `icon` | Raw URL of a square PNG, 256 px or larger. |
+| `docs` | Optional. Folder of the program's user manual in its repository; see [Documentation](#documentation). |
 | `launch` | What to run inside the unpacked program, per system. Leave a system out if the program doesn't support it. |
 | `requirements` | Things the program needs on the system (see below). |
 
@@ -74,6 +76,30 @@ For example, `ReEtched-0.2.0-windows-x64.zip`.
 - On Linux, mark the executable as executable before zipping.
 
 ReEtched's [release workflow](https://github.com/Redactional/ReEtched/blob/main/.github/workflows/release.yml) shows one way to build them.
+
+## Documentation
+
+The [website](https://redactional.github.io/ReLauncher/docs.html) shows each program's manual, read live from the program's own repository. Set `docs` to a folder on the `main` branch that contains:
+
+- **`index.json`**, the table of contents:
+  ```json
+  {
+    "title": "ReEtched manual",
+    "sections": [
+      { "title": "Basics", "pages": [
+        { "slug": "getting-started", "title": "Getting started" },
+        { "slug": "interface", "title": "The interface" }
+      ] }
+    ]
+  }
+  ```
+- **One Markdown file per page**, named `<slug>.md`, starting with a `# Title`.
+
+How pages are displayed:
+- **Links:** link to other pages with plain relative links like `[Painting](painting.md)`, or `painting.md#brushes` for a section.
+- **Images:** paths are relative to the docs folder.
+- **Search and "On this page":** the website builds the search, the "On this page" list and the previous/next links itself.
+- **Updates:** a change to the manual goes live as soon as it's on `main`. ReLauncher and the website need no update.
 
 ## Testing a change
 

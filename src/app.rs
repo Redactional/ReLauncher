@@ -13,6 +13,8 @@ use std::path::PathBuf;
 use std::sync::mpsc::{Receiver, Sender, channel};
 
 const SELF_REPO: &str = env!("CARGO_PKG_REPOSITORY");
+/// The website, with the program manuals.
+const WEBSITE: &str = "https://redactional.github.io/ReLauncher/";
 
 /// Results from background threads.
 enum Msg {
@@ -482,7 +484,29 @@ impl App {
                         ui.add_space(14.0);
                         if !p.description.is_empty() {
                             theme::card(ui, |ui| {
-                                ui.label(theme::header("ABOUT"));
+                                ui.horizontal(|ui| {
+                                    ui.label(theme::header("ABOUT"));
+                                    if p.docs.is_some() {
+                                        ui.with_layout(
+                                            egui::Layout::right_to_left(egui::Align::Center),
+                                            |ui| {
+                                                let docs = egui::Button::new(
+                                                    RichText::new(theme::label(
+                                                        ic::ICON_MENU_BOOK,
+                                                        "Documentation",
+                                                    ))
+                                                    .small(),
+                                                )
+                                                .frame(false);
+                                                if ui.add(docs).clicked() {
+                                                    self.ctx.open_url(egui::OpenUrl::new_tab(
+                                                        format!("{WEBSITE}docs.html?p={}", p.id),
+                                                    ));
+                                                }
+                                            },
+                                        );
+                                    }
+                                });
                                 ui.add_space(4.0);
                                 ui.label(&p.description);
                             });

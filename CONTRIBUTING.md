@@ -57,7 +57,7 @@ Changes to `programs.json` need no release: they reach ReLauncher users and the 
 
 ## Website
 
-The site in `site/` is plain HTML, CSS and JavaScript. It reads `programs.json` and each program's latest release from GitHub in the visitor's browser, so it never needs updating for a new version. To preview it, copy `site/`, `programs.json` and the icons into one folder the way the Website workflow does, and serve that folder (for example `python -m http.server`).
+The site in `site/` is plain HTML, CSS and JavaScript. `docs.html` renders each program's manual from its repository (see [docs/adding-programs.md](docs/adding-programs.md#documentation)); `site/vendor/` holds the Markdown renderer ([marked](https://github.com/markedjs/marked), MIT) and sanitizer ([DOMPurify](https://github.com/cure53/DOMPurify), Apache 2.0). It reads `programs.json` and each program's latest release from GitHub in the visitor's browser, so it never needs updating for a new version. To preview it, copy `site/`, `programs.json` and the icons into one folder the way the Website workflow does, and serve that folder (for example `python -m http.server`).
 
 ## License of contributions
 
