@@ -28,7 +28,7 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
       - name: Assemble the site
         run: |
           mkdir -p _site
@@ -36,9 +36,9 @@ jobs:
           cp programs.json _site/
           cp assets/icons/ReLauncher_1024.png _site/icon.png
           cp assets/icons/linux/ReLauncher_64x64.png _site/favicon.png
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
